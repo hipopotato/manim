@@ -1,0 +1,8 @@
+# This file is used internally by FFMPEG.
+file 'file:C:/Users/Daae/Documents/manim daiane/media/videos/t1/480p15/partial_movie_files/PlanoCartesiano/1185818338_2536596346_223132457.mp4'
+file 'file:C:/Users/Daae/Documents/manim daiane/media/videos/t1/480p15/partial_movie_files/PlanoCartesiano/624642324_2797062344_2932019054.mp4'
+file 'file:C:/Users/Daae/Documents/manim daiane/media/videos/t1/480p15/partial_movie_files/PlanoCartesiano/624642324_497847516_2653714982.mp4'
+file 'file:C:/Users/Daae/Documents/manim daiane/media/videos/t1/480p15/partial_movie_files/PlanoCartesiano/624642324_3537187196_2647884552.mp4'
+file 'file:C:/Users/Daae/Documents/manim daiane/media/videos/t1/480p15/partial_movie_files/PlanoCartesiano/624642324_4051204476_286099913.mp4'
+file 'file:C:/Users/Daae/Documents/manim daiane/media/videos/t1/480p15/partial_movie_files/PlanoCartesiano/624642324_4120242175_922150320.mp4'
+file 'file:C:/Users/Daae/Documents/manim daiane/media/videos/t1/480p15/partial_movie_files/PlanoCartesiano/624642324_2408024828_183414315.mp4'
