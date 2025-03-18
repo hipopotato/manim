@@ -1,0 +1,8 @@
+#STEP0- TESTE - lista oque possui alteração 
+git status
+#STEP1- Adiciona modificações em um PACOTINHO 
+git add .
+#STEP2 - fecha o pacote com as modificacoes adicionadas nele
+git commit -m "mesagem descritiva"
+#STEP3 - envia o pacote para o repositorio cadastrado como main na branch nomeada como main
+git push origin main
