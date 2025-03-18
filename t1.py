@@ -192,3 +192,4 @@ class PlanoCartesiano(Scene):
         self.wait(1)
         self.play(Transform(tri_original, tri_ampliado), Write(texto13))
         self.wait(2)
+        self.wait(2)
