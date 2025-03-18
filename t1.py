@@ -189,7 +189,12 @@ class PlanoCartesiano(Scene):
         self.play(FadeIn(new_axes), FadeIn(new_grid), Write(x_label), Write(y_label), run_time=2)
         self.play(Create(tri_original),Write(texto12), run_time=2)
         self.play(FadeOut(texto12), run_time=1)
+        #test conflito
+        self.wait(5)
         self.wait(1)
+        texto15=Tex("teste alou").shift(LEFT*3.1).scale(0.6)
+        self.play(FadeOut(texto15), run_time=2)
+        #test conflito fim
         self.play(Transform(tri_original, tri_ampliado), Write(texto13))
         self.wait(2)
         self.wait(2)
