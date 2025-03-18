@@ -22,7 +22,9 @@ class PlanoCartesiano(Scene):
 
         #self.scene1(axes,y_label,x_label,origin,origin_label,sz,tt)
         #self.scene2(axes,y_label,x_label,origin,origin_label,sz,tt)
-        self.scene3(axes,y_label,x_label,origin,origin_label,sz,tt,grid)
+        #self.scene3(axes,y_label,x_label,origin,origin_label,sz,tt,grid)
+        self.scene4(axes, y_label, x_label, origin, origin_label, sz, tt, grid)
+
 
     def scene1(self,axes,y_label,x_label,origin,origin_label,sz,tt):
         text1=Tex('O plano cartesiano é composto de duas retas numéricas perpendiculares, chamadas de eixos.').shift(UP * 3.4).scale(sz)
@@ -81,42 +83,112 @@ class PlanoCartesiano(Scene):
         self.wait(2)
 
     def scene3(self, axes, y_label, x_label, origin, origin_label, sz, tt, grid):
-            # Criando um novo plano cartesiano com intervalo de -10 a 10
-            new_axes = Axes(
+        # Criando um novo plano cartesiano com intervalo de -10 a 10
+        new_axes = Axes(
             x_range=[-10, 10], y_range=[-10, 10],
             axis_config={"color": BLUE}, x_length=6.0, y_length=6.0
-            ).scale(sz)
+        ).scale(sz)
 
-            new_grid = NumberPlane(
+        new_grid = NumberPlane(
             x_range=[-10, 10], y_range=[-10, 10],
             axis_config={"stroke_color": BLUE, "stroke_width": 6},
             x_length=6.0, y_length=6.0
-            ).scale(sz)
-            new_grid.set_opacity(0.4)
+        ).scale(sz)
+        new_grid.set_opacity(0.4)
 
-            # Definição dos pontos do polígono no plano cartesiano
-            pontos = [
-            new_axes.c2p(-5, 2),
-            new_axes.c2p(3, 4),
-            new_axes.c2p(6, -3),
-            new_axes.c2p(-2, -5),
-            new_axes.c2p(-5, 2)  # Voltando ao ponto inicial para fechar o polígono
-            ]
+        # Adicionando rótulos aos eixos
+        x_label = MathTex("x").next_to(new_axes, RIGHT)
+        y_label = MathTex("y").next_to(new_axes, UP)
 
-            # Criando o polígono
-            poligono = Polygon(*pontos, color=YELLOW)
+        # Textos explicativos
+        texto10 = Tex('Para representar um polígono no plano cartesiano, podemos associar seus vértices a pares ordenados, unir esses pontos com segmentos de reta e, por fim, pintar o interior da figura.').shift(UP * 3).scale(0.5)
 
-            # Criando pontos e rótulos
-            pontos_obj = [Dot(p, color=RED) for p in pontos[:-1]]  # Último ponto é repetido
-            rotulos = [
-            MathTex(f"P_{i}").next_to(p, UP if i % 2 == 0 else DOWN)
-            for i, p in enumerate(pontos[:-1])
-            ]
+        # Definição manual dos pontos do polígono no plano cartesiano
+        p0 = new_axes.c2p(-5, 2)
+        p1 = new_axes.c2p(3, 4)
+        p2 = new_axes.c2p(6, -3)
+        p3 = new_axes.c2p(-2, -5)
 
-            # Adicionando ao cenário
-            self.play(FadeIn(new_axes), FadeIn(new_grid), run_time=2)
-            self.play(Create(poligono), run_time=tt)
+        # Criando o polígono
+        poligono = Polygon(p0, p1, p2, p3, p0, color=YELLOW, fill_color=YELLOW, fill_opacity=0.2)
 
-            for ponto, rotulo in zip(pontos_obj, rotulos):
-                self.play(FadeIn(ponto), Write(rotulo), run_time=tt / 2)
-            self.wait(2)
+        # Criando pontos manualmente
+        ponto_0 = Dot(p0, color=RED)
+        ponto_1 = Dot(p1, color=RED)
+        ponto_2 = Dot(p2, color=RED)
+        ponto_3 = Dot(p3, color=RED)
+
+        # Criando rótulos manualmente com as coordenadas
+        rotulo_0 = MathTex("(-5,2)").scale(sz).next_to(p0, UP)
+        rotulo_1 = MathTex("(3,4)").scale(sz).next_to(p1, UP)
+        rotulo_2 = MathTex("(6,-3)").scale(sz).next_to(p2, DOWN)
+        rotulo_3 = MathTex("(-2,-5)").scale(sz).next_to(p3, DOWN)
+
+        # Criando as linhas perpendiculares aos eixos
+        ponto_p0_anim_x = DashedLine(new_axes.c2p(-5, 2), new_axes.c2p(-5, 0), color=PINK)
+        ponto_p0_anim_y = DashedLine(new_axes.c2p(-5, 2), new_axes.c2p(0, 2), color=PINK)
+        ponto_p1_anim_x = DashedLine(new_axes.c2p(3, 4), new_axes.c2p(3, 0), color=PINK)
+        ponto_p1_anim_y = DashedLine(new_axes.c2p(3, 4), new_axes.c2p(0, 4), color=PINK)
+        ponto_p2_anim_x = DashedLine(new_axes.c2p(6, -3), new_axes.c2p(6, 0), color=PINK)
+        ponto_p2_anim_y = DashedLine(new_axes.c2p(6, -3), new_axes.c2p(0, -3), color=PINK)
+        ponto_p3_anim_x = DashedLine(new_axes.c2p(-2, -5), new_axes.c2p(-2, 0), color=PINK)
+        ponto_p3_anim_y = DashedLine(new_axes.c2p(-2, -5), new_axes.c2p(0, -5), color=PINK)
+
+        # Adicionando ao cenário
+        self.play(Write(texto10))
+        self.play(FadeIn(new_axes), FadeIn(new_grid), Write(x_label), Write(y_label), run_time=2)
+        self.play(Create(poligono), run_time=1)
+        
+        self.play(FadeIn(ponto_0), Write(rotulo_0), FadeIn(ponto_p0_anim_x, ponto_p0_anim_y), run_time=tt)
+        self.play(FadeIn(ponto_1), Write(rotulo_1), FadeIn(ponto_p1_anim_x, ponto_p1_anim_y), run_time=tt)
+        self.play(FadeIn(ponto_2), Write(rotulo_2), FadeIn(ponto_p2_anim_x, ponto_p2_anim_y), run_time=tt)
+        self.play(FadeIn(ponto_3), Write(rotulo_3), FadeIn(ponto_p3_anim_x, ponto_p3_anim_y), run_time=tt)
+        self.wait(2)
+        self.clear()
+
+    def scene4(self, axes, y_label, x_label, origin, origin_label, sz, tt, grid):
+        # Criando eixos e grid
+        new_axes = Axes(
+            x_range=[-10, 10], y_range=[-10, 10],
+            axis_config={"color": BLUE}, x_length=6.0, y_length=6.0
+        ).scale(sz)
+        new_grid = NumberPlane(
+            x_range=[-10, 10], y_range=[-10, 10],
+            axis_config={"stroke_color": BLUE, "stroke_width": 6},
+            x_length=6.0, y_length=6.0
+        ).scale(sz)
+        new_grid.set_opacity(0.4)
+
+        # Adicionando rótulos aos eixos
+        x_label = MathTex("x").next_to(new_axes, RIGHT)
+        y_label = MathTex("y").next_to(new_axes, UP)
+
+        # Texto explicativo
+        texto = Tex('Ampliação e redução de figuras planas no plano cartesiano').shift(UP * 3).scale(0.6)
+
+        # Definição dos pontos dos triângulos
+        A = new_axes.c2p(-2, 2)
+        B = new_axes.c2p(-4, -4)
+        C = new_axes.c2p(2, 4)
+        tri_original = Polygon(A, B, C, color=WHITE)
+        
+        D = new_axes.c2p(-1, 1)
+        E = new_axes.c2p(-2, -2)
+        F = new_axes.c2p(1, 2)
+        tri_reducao = Polygon(D, E, F, color=GREEN)
+        
+        G = new_axes.c2p(-4, 4)
+        H = new_axes.c2p(-8, -8)
+        I = new_axes.c2p(4, 8)
+        tri_ampliado = Polygon(G, H, I, color=RED)
+        texto12=Tex('Triângulo ABC').shift(LEFT * 3.5).scale(0.6)
+        texto13=Tex('Ampliação do r"\\" Triângulo ABC').shift(LEFT * 3).scale(0.6)
+        texto14=Tex('Redução do Triângulo ABC').shift(LEFT * 3).scale(0.6)
+        # Animações
+        self.play(Write(texto))
+        self.play(FadeIn(new_axes), FadeIn(new_grid), Write(x_label), Write(y_label), run_time=2)
+        self.play(Create(tri_original),Write(texto12), run_time=2)
+        self.play(FadeOut(texto12), run_time=1)
+        self.wait(1)
+        self.play(Transform(tri_original, tri_ampliado), Write(texto13))
+        self.wait(2)

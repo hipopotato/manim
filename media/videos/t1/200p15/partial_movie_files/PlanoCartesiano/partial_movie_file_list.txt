@@ -1,4 +1,0 @@
-# This file is used internally by FFMPEG.
-file 'file:C:/Users/Daae/Documents/python me/media/videos/t1/200p15/partial_movie_files/PlanoCartesiano/4227105729_1283655074_223132457.mp4'
-file 'file:C:/Users/Daae/Documents/python me/media/videos/t1/200p15/partial_movie_files/PlanoCartesiano/2943787801_3826753462_1712744747.mp4'
-file 'file:C:/Users/Daae/Documents/python me/media/videos/t1/200p15/partial_movie_files/PlanoCartesiano/2943787801_3819538937_3246787861.mp4'
